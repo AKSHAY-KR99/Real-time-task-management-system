@@ -1,0 +1,8 @@
+from motor.motor_asyncio import AsyncIOMotorClient
+from app.core.config import MONGO_URL, MONGO_DB_NAME
+
+client = AsyncIOMotorClient(MONGO_URL)
+db = client[MONGO_DB_NAME]
+
+users_collection = db["users"]
+tasks_collection = db["tasks"]

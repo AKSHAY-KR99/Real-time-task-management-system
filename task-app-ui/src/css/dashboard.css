@@ -1,0 +1,22 @@
+.dashboard {
+  padding: 20px 40px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1B3653;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 14px;
+}
+
+.user-info span {
+  margin-right: 15px;
+  font-size: 14px;
+}
+
+.dashboard-actions {
+  margin: 20px 0;
+}

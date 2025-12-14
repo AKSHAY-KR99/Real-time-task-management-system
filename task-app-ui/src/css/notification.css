@@ -1,0 +1,16 @@
+.notification {
+  position: fixed;
+  top: 20px;
+  right: -300px;
+  background-color: #055a1f;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  animation: slideIn 0.4s forwards;
+}
+
+@keyframes slideIn {
+  to {
+    right: 20px;
+  }
+}

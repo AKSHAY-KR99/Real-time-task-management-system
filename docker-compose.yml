@@ -1,0 +1,41 @@
+services:
+  api:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      MONGO_DB_NAME: tsm_db
+      JWT_SECRET_KEY: secret_key
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 30
+    volumes:
+      - .:/app
+    restart: always
+
+  ui:
+    build: ./task-app-ui
+    container_name: react_app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./task-app-ui:/app
+      - /app/node_modules
+    restart: always
+
+  mongo:
+    image: mongo:7
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
