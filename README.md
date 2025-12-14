@@ -19,7 +19,11 @@ MONGO_URL=mongodb://localhost:27017 \
 MONGO_DB_NAME=tsm_db \
 JWT_SECRET_KEY = "secrete_key" \
 JWT_ALGORITHM = "HS256" \
-ACCESS_TOKEN_EXPIRE_MINUTES = 30 
+ACCESS_TOKEN_EXPIRE_MINUTES = 30 \
+CELERY_BROKER_URL=redis://localhost:6379/0 \
+CELERY_RESULT_BACKEND=redis://localhost:6379/0 \
+MAIL_PASSWORD=**password** \
+MAIL_FROM=email@gmail.com
 
 ### 5. run the server
 uvicorn app.main:app --reload

@@ -14,6 +14,8 @@ from app.tasks.services import (
 )
 from app.core.dependencies import get_current_user
 from app.database import tasks_collection
+from app.tasks.celery_tasks import process_task_celery
+
 
 router = APIRouter(prefix="/tasks", tags=["Tasks"])
 
@@ -52,13 +54,24 @@ async def create_new_task(
         if not new_task:
             raise HTTPException(status_code=500, detail="Task creation failed")
 
+        
+        # background task call
         background_tasks.add_task(
             process_task,
             new_task["id"],
             current_user["id"],
             new_task["title"]
         )
-
+        
+        
+        # Celery task call
+        # process_task_celery.delay(
+        #     new_task["id"],
+        #     current_user["id"],
+        #     new_task["title"],
+        #     current_user["email"]
+        # )
+        
         return new_task
 
     except HTTPException:
